@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!--
+태그는 화면에 출력되지 않음.
+브라우저는 태그들을 해석해서 화면부분만 처리(인터프리터)
+head영역에는 스타일시트와 자바스크립트가 올 수 있다.
+
+html용어
+태그 : <body>,</body> 시작태그와 끝태그
+요소 :
+속성 : <img src=""/>  src부분이 속성
+ -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>처음만들어보는 HTML</title>
+<script type="text/javascript">
+	var i = 10;//자바스크립트도 컴파일하지 않음. 데이터 타입은 런타임시 결정
+	function send(){ //함수 - 컴파일하지 않음- 문법에러를 발견하기 힘들다.
+		alert("send호출 성공");
+		console.log("sned")
+	}
+</script>
+</head>
+<body>
+<!--주석임. -->
+hyper text markup <b>language</b>
+<button onclick="send()">전송</button>
+<img src="../images/lion22.png"/>
+</body>
+</html>
