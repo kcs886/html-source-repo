@@ -32,7 +32,6 @@ public class JsonDeptList {
 		deptList.add(rmap); //List.add추가
 		return deptList;
 	}
-	
 	public static void main(String[] args) {
 		JsonDeptList jdl = new JsonDeptList();
 		List<Map<String,Object>> deptList = jdl.getDeptList();
