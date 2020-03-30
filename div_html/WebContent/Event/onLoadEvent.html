@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>onload이벤트활용</title>
+</head>
+<body>
+<!-- 
+	dom먼저? 아니면 event처리가 먼저?
+ 바디에서 스크립트를 쓸때 위치선정이 중요하다.
+ -->
+ 
+ <script type="text/javascript">
+	var be = document.getElementById("header");
+	alert("before==>"+be); //null
+ </script>
+	<h1 id="header">Click</h1>
+ <script type="text/javascript">
+	var af = document.getElementById("header");
+	alert("after==>"+af); //HTML Object
+ </script>
+</body>
+</html>

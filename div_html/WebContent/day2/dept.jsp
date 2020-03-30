@@ -11,4 +11,3 @@
 	String temp = g.toJson(deptList);
 	out.print(temp);
 %>
-

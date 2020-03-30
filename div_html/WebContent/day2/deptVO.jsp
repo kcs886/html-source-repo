@@ -1,3 +1,4 @@
+<%@page import="com.dept.DeptVO"%>
 <%@page import="com.dept.JsonDeptList"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.google.gson.Gson"%>
@@ -5,10 +6,9 @@
     pageEncoding="UTF-8"%>
 <%
 	JsonDeptList jdl = new JsonDeptList();
-	java.util.List<Map<String,Object>> deptList = null;
-	deptList = jdl.getDeptList();
+	java.util.List<DeptVO> deptList = null;
+	deptList = jdl.getDeptVO();
 	Gson g = new Gson();
 	String temp = g.toJson(deptList);
 	out.print(temp);
 %>
-

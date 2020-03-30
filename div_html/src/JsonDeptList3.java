@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.google.gson.Gson;
 
-public class JsonDeptList {
+public class JsonDeptList3 {
 	public List<Map<String,Object>> getDeptList(){
 		List<Map<String,Object>> deptList = new ArrayList<>();
 		Map<String,Object> rmap = new HashMap<>(); //1EA
@@ -34,7 +34,7 @@ public class JsonDeptList {
 	}
 	
 	public static void main(String[] args) {
-		JsonDeptList jdl = new JsonDeptList();
+		JsonDeptList3 jdl = new JsonDeptList3();
 		List<Map<String,Object>> deptList = jdl.getDeptList();
 		Gson g = new Gson();
 		String temp = g.toJson(deptList);

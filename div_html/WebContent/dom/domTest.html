@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+	window.onload= function(){
+		var header = document.createElement("h1");
+		var textNode = document.createTextNode("Hello DOM!!!");
+		//노드를 연결
+		header.appendChild(textNode);
+		document.body.appendChild(header);
+	}
+</script>
+</body>
+</html>
