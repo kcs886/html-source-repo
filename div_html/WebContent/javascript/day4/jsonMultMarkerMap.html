@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRZtKcukT1K_5l4AnkjemFLjWWFBX57MU"></script>
+</head>
+<body>
+	<div id="d_map" style="width:800px; height:600px;"></div>
+	<script type="text/javascript">
+	var map = new google.maps.Map(document.getElementById('d_map'),{
+		zoom: 14
+	   ,center: new google.maps.LatLng(37.478870,126.878648)
+	   ,mapTypeId: google.maps.MapTypeId.ROADMAP
+	});
+	var infowindow = new google.maps.InfoWindow();
+	var marker; //디비 n개가 출력되야함. 
+	var i;//마커에대한 고유숫자값 (마커 생성시 부여한 인덱스값)-> 포문의 i에 값으로 처리했음
+		$.ajax({
+			url: 'jsonMapList.jsp'
+		   ,dataType: 'json'
+		   ,success:function(data){
+			//$("#d_map").text(data);
+			var result = JSON.stringify(data); //result를 출력해도 값은 정상적으로 찍힌다.
+			var jsonDoc = JSON.parse(result); //[2차 가공]파싱을 해줘야 배열로 값을 뺼수있따.
+			for(var i=0; i<jsonDoc.length; i++){
+				//alert(jsonDoc[i].res_name);
+				marker = new google.maps.Marker({
+					id: i
+				   ,position: new google.maps.LatLng(jsonDoc[i].lat,jsonDoc[i].lng)
+				   ,map: map
+				   ,title: jsonDoc[i].res_name
+				});
+				google.maps.event.addListener(marker,'click',(function(marker,i){
+					return function() {
+						infowindow.setContent('<b>'+jsonDoc[i].res_name+'</b>'); //infowindow : 말풍선처리해주는 클래스
+						infowindow.open(map,marker);
+					}//end of 반환함수
+				})(marker,i));
+				if(marker){ //자바스크립트 에서는 0이 아니면 모두 true (오브젝트를갖고있으면 무조건true)
+					marker.addListener('click',function(){
+						map.setZoom(15);
+						map.setCenter(this.getPosition());
+					});
+				}
+			}//////////////end of for
+		   }
+		});
+	</script>
+</body>
+</html>

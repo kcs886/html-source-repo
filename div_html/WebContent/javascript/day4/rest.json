@@ -1,0 +1,38 @@
+[
+{
+lng: 123,
+res_photo: "23",
+res_name: "123",
+lat: 123
+},
+{
+lng: 12,
+res_photo: "123",
+res_name: "123",
+lat: 12
+},
+{
+lng: 126.884316,
+res_photo: "num1.jpg",
+res_name: "여신족발",
+lat: 37.482447
+},
+{
+lng: 126.882943,
+res_photo: "num2.jpg",
+res_name: "강촌",
+lat: 37.482481
+},
+{
+lng: 126.882335,
+res_photo: "num3.jpg",
+res_name: "새마을식당 가산점",
+lat: 37.4805
+},
+{
+lng: 126.8824997,
+res_photo: "chicken.jpg",
+res_name: "돌돌치킨 ",
+lat: 37.4798346
+}
+]
