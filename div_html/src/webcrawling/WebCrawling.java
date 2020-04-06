@@ -34,7 +34,7 @@ public class WebCrawling {
 			for(int i=1; i<strs.length;i++) {
 				strs2= strs[i].split("</th>");
 				titleList.add(strs2[0]);
-			}
+			} 
 			
 			for(String title:titleList) {
 				System.out.println(title);

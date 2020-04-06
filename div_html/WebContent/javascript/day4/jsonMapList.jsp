@@ -8,5 +8,6 @@
 	List<Map<String,Object>> mrList = rDao.mapRestList();
 	Gson g = new Gson();
 	String imsi = g.toJson(mrList);
+	//out.print(mrList);  포멧형식이 json이아니라 못뺸다.
 	out.print(imsi);
 %>
