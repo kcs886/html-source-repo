@@ -68,9 +68,6 @@ public class WebCrawling{
 	    	  System.out.println(dataList.get(i));
 	      }
 	      */
-	      
-	      
-	      
 	    }
 	    catch (Exception e) {
 	      e.printStackTrace();
