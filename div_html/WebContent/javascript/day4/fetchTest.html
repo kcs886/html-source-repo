@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+	fetch('http://localhost:8000/javascript/day4/procJsonMapList2.jsp',{
+		method:"POST"
+	})
+	.then((resp) => resp.json())
+	.then(json => console.log(json))
+</script>
+</body>
+</html>
