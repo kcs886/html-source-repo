@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--
+각 브라우저들은 부분 페이지 갱신을 위해서 모두 비동기 통신객체를 지원함.
+XMLHttpRequest
+속성
+함수
+  -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.js"></script>
+<style type="text/css">
+	body{
+		font-famil: sans-serif;
+		text-align: center;
+	}
+	table{
+		margin-left: auto;
+		margin-right: auto;
+		border: 1px solid black;
+	}
+	td,th{
+		border: 1px dotted gray;
+		text-align:center;
+	}
+	th{
+		background-color: #FFAAAA;
+	}
+</style>
+<script type="text/javascript">
+	function getBoardSold(){
+		alert("getBoardSold 호출 성공");
+		$.ajax({
+			url: "boardAction.jsp"
+		   ,method: "get"
+		   ,dataType: "text"
+		   ,success:function(data){
+				$("#boardSold").text(data);
+				var price = $("#price").text();
+				var cost = $("#cost").text();
+				var perMargin = price-cost;
+				var marzin = perMargin*data;
+				$("#cash").text(marzin);
+		   }
+		  ,error:function(xhrObject){ //xhrObject == XMLHttpRequest
+			  alert(xhrObject.responseText);
+		  }
+		});
+	}
+	
+</script>
+</head>
+<body>
+<h2>보드 판매량</h2>
+<table width="300px" height="80px">
+	<tr>
+		<th width="120px">보드판매량</th> <!--가운데정렬  -->
+		<td width="180px"><span id="boardSold">10</span>개</td>
+	</tr>
+	<!--
+	소비자가 - 구매가 = 보드 한개당 마진 금액
+	한개당 마진 금액*판매량 =마진금액계산
+	 -->
+	<tr>
+		<th>구매가</th>
+		<td><span id="cost">100</span>원</td>
+	</tr>
+		<tr>
+		<th>소비자값</th>
+		<td><span id="price">120</span>원</td>
+	</tr>
+</table>
+<h2>마진금액 : <span id="cash">0</span>원</h2>
+<button onclick="getBoardSold()">마진은?</button>
+</body>
+</html>

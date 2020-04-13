@@ -74,8 +74,8 @@ public class MemberDAO {
 			//오라클에서만 제공되는 REFCURSOR이므로 오라클에서 제공하는 인터페이스로 형전환하기
 			ocstmt = (OracleCallableStatement)cstmt;
 			rs = ocstmt.getCursor(1);
-			rMap = new HashMap<>();
 			while(rs.next()) { //커서의 위치에 데이터가 있는거야? 응
+				rMap = new HashMap<>();
 				rMap.put("mem_no", rs.getInt("mem_no"));
 				rMap.put("mem_id", rs.getString("mem_id"));
 				rMap.put("mem_pw", rs.getString("mem_pw"));
