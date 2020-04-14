@@ -75,7 +75,7 @@ XMLHttpRequest
 	function sold_process(){
 		//alert(xhrObject.readyState); //0->1->2->3->4 단계별로 상태값에 정의: 상태값을 숫자값으로 출력해줌
 		if(xhrObject.readyState ==4){ //다운로드가 완료된 상태니?
-			if(xhrObject.status ==200){
+			//if(xhrObject.status ==200){
 			var newTotal = xhrObject.responseText;
 			//alert("new Total :"+newTotal);
 			var boardSoldEl = document.getElementById("boardSold");
@@ -94,7 +94,7 @@ XMLHttpRequest
 			alert("전체 마진금액은"+cash);
 			var cashEl = document.getElementById("cash");
 			replaceText(cashEl,cash);
-			}/////////////end of 200 OK 상태값
+			//}/////////////end of 200 OK 상태값
 		}///////////end of 4로 처리가 완료된 상태
 	}
 	//span태그가 가지고 있는 텍스트 노드값을 읽어오기

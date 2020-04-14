@@ -17,7 +17,7 @@
 <body>
  회원 정보 추가 영역
  <label>비밀번호확인</label>
- <input id="mem_pw2" class="easyui-passwordbox" prompt="Password" iconWidth="28"
+ <input id="mem_pw" class="easyui-passwordbox" prompt="Password" iconWidth="28"
   style="width:100%;height:34px;padding:10px">
  <br>
  <button onClick="add()">등록</button>

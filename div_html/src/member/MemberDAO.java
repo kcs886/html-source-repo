@@ -40,8 +40,8 @@ public class MemberDAO {
 			pstmt=con.prepareStatement(sb.toString());
 			rs=pstmt.executeQuery();
 			
-			rMap = new HashMap<>();
 			while(rs.next()) {
+				rMap = new HashMap<>();
 				rMap.put("mem_no", rs.getInt("mem_no"));
 				rMap.put("mem_id", rs.getString("mem_id"));
 				rMap.put("mem_pw", rs.getString("mem_pw"));
