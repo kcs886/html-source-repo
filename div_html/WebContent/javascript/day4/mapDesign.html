@@ -10,10 +10,12 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRZtKcukT1K_5l4AnkjemFLjWWFBX57MU"></script>
+
     <script type="text/javascript">
     	function login() {
     		var u_id = $("#tb_id").val();
     		var u_pw = $("#tb_pw").val();
+    		var mem_name = "";
     		//사용자가 입력한 아이디와 비번 확인하기
 			fetch("loginAction.jsp?mem_id="+u_id+"&mem_pw="+u_pw,{
 				method: "POST"
