@@ -17,5 +17,7 @@
 DML 구문 즉 SELECT, INSERT, UPDATE, DELETE을 작성된 xml파일의 물리적인 위치와 파일명을 등록하기
 -->
 		<mapper resource="orm/mybatis/mapper/emp.xml" />
+		<mapper resource="orm/mybatis/mapper/dept.xml" />
+		<mapper resource="orm/mybatis/mapper/book.xml" />
 	</mappers>
 </configuration> 
