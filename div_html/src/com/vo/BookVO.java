@@ -1,13 +1,13 @@
 package com.vo;
 
 public class BookVO {
-	private int book_no      = 0;
-	private String book_title   = null;
-	private String book_img     = null;
-	private String book_author  = null;
-	private String book_publish = null;
-	private String book_date    = null;
-	private int	   book_price   = 0;
+	private int    book_no     =0;//  
+	private String book_title  =null;//  
+	private String book_img    =null;//  
+	private String book_author =null;//  
+	private String book_publish=null;//  
+	private String book_date   =null;//  
+	private int    book_price  =0;//  
 	public int getBook_no() {
 		return book_no;
 	}
@@ -50,5 +50,4 @@ public class BookVO {
 	public void setBook_price(int book_price) {
 		this.book_price = book_price;
 	}
-	
 }
