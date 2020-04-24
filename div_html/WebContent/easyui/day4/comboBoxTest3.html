@@ -19,11 +19,11 @@ textField - 화면에 출력되는 필드
 <script type="text/javascript">
 	$(document).ready(function (){
 		$("#cb_title").combobox({
-				data: [{lable:'java',value:'Java'}
-					  ,{lable:'oracle',value:'Oracle'}
-					  ,{lable:'ajax',value:'Ajax'}]		
-			    ,valueField:'label'
-			    ,textField:'value'
+				data: [{lable:'java',value:'자바'}
+					  ,{lable:'oracle',value:'오라클'}
+					  ,{lable:'ajax',value:'아작스'}]		
+			    ,valueField:'label' //서버에 전송되는것
+			    ,textField:'value' //실제로 화면에 보이는것
 		});
 	});
 </script>

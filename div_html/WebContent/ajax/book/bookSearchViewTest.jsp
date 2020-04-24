@@ -121,6 +121,7 @@
 							   clearMethod();
 						   }
 					   }
+					   
 				   }
 				,error:function(xhrObject){
 					alert(xhrObject.responseText);

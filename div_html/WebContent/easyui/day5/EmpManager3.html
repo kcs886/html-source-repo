@@ -11,6 +11,12 @@
     <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
     
      <script type="text/javascript">
+     	function empnoSearch(){
+     		var s_empno = $("#s_empno").val();
+			$("#dg_emp").datagrid({
+				url:'jsonEmpList.jsp?empno='+s_empno
+			});   		
+     	}
     	function empList(){
     		$("#dg_emp").datagrid({
  			   	url:"http://localhost:8000/easyui/day5/jsonEmpList.jsp"
@@ -49,11 +55,34 @@
 </head>
 
 <body>
+<!--====================== 검색 조건 추가하기 시작 ========================-->
+<div id="tbar_emp">	
+	<form id="f_search">
+		<table>
+			<tr>
+				<td width="190px">
+					<label width="80px">사원번호</label>
+					<input id="s_empno" name="s_empno" class="easyui-searchbox" data-options="prompt:'사원번호',searcher:empnoSearch" style="width:110px">
+				</td>
+			</tr>
+			<tr>
+				<td>
+				 	  <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="empList()">사원조회</a>
+       			 	  <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="123()">사원등록</a>
+      				  <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">사원수정</a>
+      				  <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">사원삭제</a>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+<!--====================== 검색 조건 추가하기    끝 ========================-->
  	<table id="dg_emp"></table>
  	<script type="text/javascript">
  		$(document).ready(function(){
  			$('#dg_emp').datagrid({
- 				title:'사원관리 - 자바스크립트 만으로 구성하기'
+ 				toolbar: '#tbar_emp'
+ 				,title:'사원관리 - 자바스크립트 만으로 구성하기'
  				,width:'1100px'
  			   ,url:'jsonEmpList.jsp',
  			    columns:[[
@@ -65,7 +94,17 @@
  			        ,{field:'MGR',title:'MGR',width:150,align:'center',editor:'numberbox', hidden:'true'}
  			        ,{field:'SAL',title:'급여',width:110,align:'center',editor:'numberbox'}
  			        ,{field:'COMM',title:'인센티브',width:100,align:'center',editor:'numberbox'}
- 			        ,{field:'DEPTNO',title:'부서번호',width:100,align:'center',editor:'numberbox'}
+ 			        ,{field:'DEPTNO',title:'부서번호',width:100,align:'center'
+ 			        	,editor:{
+ 			        		type:'combobox'
+ 			        		,options:{
+ 			        			valueField:'DEPTNO'//실제 서버에 넘어가는 필드
+ 			        		   ,textField:'DNAME' //화면에 출력되는 필드
+ 			        		   ,url:'./jsonDeptList.jsp'
+ 			        		   ,required:true
+ 			        		}/////////end of options
+ 			        	}/////////////end of editor
+ 			         }
  			        ,{field:'action',title:'Action',width:100,align:'center',
  			        	
  			        	
@@ -101,18 +140,10 @@
  	            row.editing = false;
  	            $(this).datagrid('refreshRow', index);
  	        }
- 			,toolbar: '#toolbar'
  			});
  		});
  	</script>
-      <div id="toolbar">
-    
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="empList()">사원조회</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="123()">사원등록</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">사원수정</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">사원삭제</a>
-    
-    </div>
+
     
    
 </body>
