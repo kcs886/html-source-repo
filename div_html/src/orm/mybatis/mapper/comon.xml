@@ -22,4 +22,17 @@
 			  </if>
 		 </where>
 	</select>
+	
+	<select id="getZipcodeList" parameterType="map" resultType="java.util.Map">
+	select address,zipcode from zipcode_t
+	<where>
+		<if test="address != null">
+			AND address like '%'||#{address}||'%' 
+		</if>
+	</where>
+	</select>
+	
+
+	
+	
 </mapper> 
