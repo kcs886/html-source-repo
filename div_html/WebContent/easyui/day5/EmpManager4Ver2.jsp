@@ -7,7 +7,8 @@
 <title>사원 관리</title>
 <%@ include file="./JEasyUiComon.jsp" %>
     <script type="text/javascript">
-    	
+    	var g_address='';
+    	var g_zipcode='';
     	function empINS(){
     		$("#dlg_ins").dialog('open');
     		}
@@ -49,7 +50,6 @@
 		}		
 		/////////////////// DataGrid에 직접 수정 모드 추가하기  끝  ////////////////////
     	function zipcode_search(){
-    		alert("우편번호 찾기");
     		var addr = $("#dong").val();
     		if(addr == null || addr.length<1){
     			alert("동을 입력하세요.");
@@ -57,9 +57,19 @@
     		}else{
     			$("#dg_zipcode").datagrid({
     				url:'zipcodeListVer2.jsp?addr='+addr
+    			 	,singleSelect:true
      			});
     		}
     	}
+		//사원정보 등록 처리
+		function emp_ins(){
+			//화면에서 입력받은 값은 http프로토콜을 이용해서 서버쪽으로 전송되는데 이때 유니코드로 변환되어 전달됨.
+			//해결방법 -server.xml문서에 포트번호 설정 위치(63번라인) URIEncoding="UTF-8"
+			//단 get방식에만 적용됨. post방식일때는 java코드를 활용하여 별도처리
+			$("#f_ins").attr("method","get");
+			$("#f_ins").attr("action","empInsert.jsp");
+			$("#f_ins").submit();
+		}
     </script>
     <style type="text/css">
     
@@ -92,6 +102,14 @@
  	<table id="dg_emp"></table>
  	<script type="text/javascript">
  		$(document).ready(function(){
+ 			/* 동 입력 후 엔터 쳤을때 처리하기*/
+ 			var t = $('#dong');
+			t.textbox('textbox').bind('keydown', function(e){
+			if (e.keyCode == 13){	// when press ENTER key, accept the inputed value.
+				zipcode_search();
+			}
+			});
+ 			
  			/* 우편번호 찾기 화면에 대한 초기화 */
  			$("#dlg_zipcode").dialog({
  				title:"우편번호 검색기"
@@ -100,14 +118,26 @@
  				,closed:true
  			});
  			
+ 			
  			$("#dg_zipcode").datagrid({
  				title:'우편번호 찾기 검색 결과'
  				,columns:[[
  					 {field:'ZIPCODE', title:'우편번호', width:100, align:'center'}
  					,{field:'ADDRESS', title:'주소', width:400, align:'left'}
  				]]
- 			});
  			
+ 				,onDblClickRow: function(index,row){
+ 					//선택한 로우의 우편번호와 주소 정보 읽어서 변수에 담기 처리
+ 					//여기에 ROW는 사용자가 선택한 로우의 정보를 조회
+ 					g_zipcode = row.ZIPCODE;//필드명은 MYBATIS를 사용했으니까 꼭 대문자
+ 					g_address = row.ADDRESS;//필드명은 MYBATIS를 사용했으니까 꼭 대문자
+					$("#zipcode").textbox("setValue",g_zipcode);
+					$("#mem_addr").textbox("setValue",g_address);
+					$("#dg_zipcode").datagrid("clearSelections");
+					$("#dlg_zipcode").dialog('close');
+ 				}
+ 				});
+ 		
  			/* 우편번호 찾기 버튼  */
  			$("#btn_zipcode").linkbutton({
  				onClick:function(){
@@ -206,23 +236,50 @@
  	<!--============================ 우편번호 찾기  끝 ===========================-->
  	
 	<!--============================ 사원등록 시작 ==============================-->
-	<div id="dlg_ins" data-options="closed:true, title:'사원정보 등록'" class="easyui-dialog" style="width:100%;max-width:480px;padding:30px 60px">
+	<div id="dlg_ins" data-options="closed:true, title:'사원정보 등록',footer:'#d_ins'" class="easyui-dialog" style="width:100%;max-width:480px;padding:30px 60px">
 		<form id="f_ins">
-			<div style="margin-bottom:10px">
+			<div style="margin-bottom:5px">
 			<input class="easyui-textbox" id="empno" name="empno" label="사원번호" labelPosition="top" data-options="prompt:'Enter a EmpNO'" style="width:150px">
 			</div>
-			<div style="margin-bottom:10px">
+			<div style="margin-bottom:5px">
 			<input class="easyui-textbox" id="ename" name="ename" label="사원명" labelPosition="top" data-options="prompt:'Enter a ENAME'" style="width:250px">
 			</div>
-			<div style="margin-bottom:10px">
+			<div style="margin-bottom:5px">
+			<input class="easyui-textbox" id="job" name="job" label="JOB" labelPosition="top" data-options="prompt:'Enter a JOB'" style="width:250px">
+			</div>
+			<div style="margin-bottom:5px">
+			<input class="easyui-textbox" id="mgr" name="mgr" label="MGR" labelPosition="top" data-options="prompt:'Enter a MGR'" style="width:250px">
+			</div>
+			<div style="margin-bottom:5px">
+			<input class="easyui-textbox" id="hiredate" name="hiredate" label="일사일자" labelPosition="top" data-options="prompt:'Enter a HIRE_DATE'" style="width:250px">
+			</div>
+			<div style="margin-bottom:5px">
+			<input class="easyui-textbox" id="sal" name="sal" label="급여" labelPosition="top" data-options="prompt:'Enter a SAL'" style="width:250px">
+			</div>
+			<div style="margin-bottom:5px">
+			<input class="easyui-textbox" id="comm" name="comm" label="인센티브" labelPosition="top" data-options="prompt:'Enter a COMM'" style="width:250px">
+			</div>
+			<div style="margin-bottom:5px">
+			<input class="easyui-combobox" id="deptno" name="deptno" label="부서번호" labelPosition="top"
+				  data-options="prompt:'Enter a 부서번호' 
+              	 ,valueField: 'DEPTNO'
+                 ,textField: 'DNAME'
+                 ,url: 'jsonDeptList.jsp'
+                 ,onSelect: function(rec){
+                 }"/>
+			</div>
+			<div style="margin-bottom:5px">
 			<input class="easyui-textbox" id="zipcode" name="zipcode" label="우편번호" labelPosition="top" data-options="prompt:'Enter a ZIPCODE'" style="width:130px">
 			<a id="btn_zipcode" href="#" class="easyui-linkbutton">우편번호찾기</a>
 			</div>
-			<div style="margin-bottom:10px">
+			<div style="margin-bottom:5px">
 			<input class="easyui-textbox" id="mem_addr" name="mem_addr" label="주소" labelPosition="top" data-options="prompt:'Enter a ADDRESS'" style="width:400px">
 			</div>
-			
 		</form>
+		<div id="d_ins" style="margin-bottom:10px">
+			<a id="btn_save" href="javascript:emp_ins()" class="easyui-linkbutton" data-options="iconCls:'icon-save'">저장</a>
+			<a id="btn_close" href="javascript:$('#dlg_ins').dialog('close')" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'">닫기</a>
+		</div>
 	</div>	
 	<!--============================ 사원등록  끝 ==============================-->
 
@@ -244,6 +301,5 @@
 	</div>
 	<!--============================ 사원삭제  끝 ==============================-->
     
-   
 </body>
 </html>

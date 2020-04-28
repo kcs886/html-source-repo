@@ -17,4 +17,8 @@
 	   	delete from emp
 	   	where empno = #{empno}<!-- Map<String,Object> map.put("empno",7566); -->
 	   </delete>
+	   
+	   <insert id="empINS" parameterType="map">
+	  		 insert into emp values(#{empno},#{ename},#{job},#{mgr},#{hiredate},#{sal},#{comm},#{deptno})
+	   </insert>
 </mapper> 

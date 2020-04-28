@@ -11,27 +11,22 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.log4j.Logger;
 
-public class SqlMapBookDao {
+import com.util.DBMyBatisMgr;
+
+public class SqlMapBookDao2 {
 	Logger logger = Logger.getLogger(SqlMapEmpDao.class); 
-	SqlSessionFactory sqlMapper = null;
+	SqlSession sqlSec = null;
+	DBMyBatisMgr dbmgr = DBMyBatisMgr.getInstance();
+	List<Map<String,Object>> elist = null;
+	
 	public List<Map<String,Object>> bookList(Map<String,Object> pMap){
-		List<Map<String,Object>> elist = null;
-		String resource = "orm/mybatis/Configuration.xml";
-		try {
-			Reader reader = Resources.getResourceAsReader(resource);
-			sqlMapper = new SqlSessionFactoryBuilder().build(reader);
-			//sql문을 요청하기 위한 SqlSession객체 생성하기
-			SqlSession sqlSec = sqlMapper.openSession();
+			sqlSec = dbmgr.openSession();
 			elist = sqlSec.selectList("bookList",pMap);
-			System.out.println("조회한 로우 수 : "+elist.size());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return elist;
+			return elist;
 		}
 	
 	public static void main(String[] args) {
-		SqlMapBookDao eDao = new SqlMapBookDao();
+		SqlMapBookDao2 eDao = new SqlMapBookDao2();
 		List<Map<String,Object>> empList =eDao.bookList(null);
 	}
 }
