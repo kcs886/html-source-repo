@@ -6,6 +6,7 @@
 	   <if test="empno > 0">
 	      where empno = #{empno}
 	   </if>
+	   ORDER BY empno desc
 	   </select>
 	   <!-- 
 	     <select id="empList2" parameterType="map" resultType="java.util.EmpVO">

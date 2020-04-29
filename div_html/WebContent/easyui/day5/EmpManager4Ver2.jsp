@@ -67,7 +67,7 @@
 			//해결방법 -server.xml문서에 포트번호 설정 위치(63번라인) URIEncoding="UTF-8"
 			//단 get방식에만 적용됨. post방식일때는 java코드를 활용하여 별도처리
 			$("#f_ins").attr("method","get");
-			$("#f_ins").attr("action","empInsert.jsp");
+			$("#f_ins").attr("action","empInsert2.jsp");
 			$("#f_ins").submit();
 		}
     </script>
@@ -167,8 +167,8 @@
  				toolbar: '#tbar_emp'
  				,title:'사원관리 - 자바스크립트 만으로 구성하기'
  				,width:'1100px'
- 			   ,url:'jsonEmpList.jsp',
- 			    columns:[[
+ 			   //,url:'jsonEmpList.jsp',
+ 			    ,columns:[[
  			         {field:'CK',checkbox:true,width:50,align:'center'}
  			        ,{field:'EMPNO',title:'사원번호',width:90,align:'center', editor:'numberbox'}
  			        ,{field:'ENAME',title:'사원명',width:120,align:'center', editor:'text'}

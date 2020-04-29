@@ -28,7 +28,7 @@ public class SqlMapEmpDao {
 		try {
 			Reader reader = Resources.getResourceAsReader(resource);
 			sqlMapper = new SqlSessionFactoryBuilder().build(reader);
-			SqlSession sqlSes = sqlMapper.openSession();
+			SqlSession sqlSes = sqlMapper.openSession(true);
 			result=sqlSes.insert("empINS",pMap);
 			logger.info("result:"+result); //executeUpdate() : int
 		} catch (Exception e) {
