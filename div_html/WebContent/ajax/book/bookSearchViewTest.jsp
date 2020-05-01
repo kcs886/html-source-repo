@@ -120,7 +120,7 @@
 							   $("#_easyui_textbox_input1").val($(this).text());
 							   clearMethod();
 						   }
-					   }
+					   } 
 					   
 				   }
 				,error:function(xhrObject){

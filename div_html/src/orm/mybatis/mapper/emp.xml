@@ -14,12 +14,43 @@
 	   from emp
 	   </select>
 	    -->
-	   <delete id="empDelete" parameterType="map">
-	   	delete from emp
-	   	where empno = #{empno}<!-- Map<String,Object> map.put("empno",7566); -->
-	   </delete>
 	   
 	   <insert id="empINS" parameterType="map">
 	  		 insert into emp values(#{empno},#{ename},#{job},#{mgr},#{hiredate},#{sal},#{comm},#{deptno})
 	   </insert>
+	   
+	   <update id="empUPD" parameterType="map">
+	  		 update emp set 
+	  		 <if test="ename!=null">
+	  		 ename=#{empno}  
+	  		 </if>
+	  		 <if test="job!=null">
+	  		 ,job=#{job}
+	  		 </if>
+	  		 <if test="mgr>0">
+	  		 ,mgr=#{mgr}
+	  		 </if>
+	  		  <if test="hiredate!=null">
+	  		 ,hiredate=#{hiredate}
+	  		 </if>
+	  		  <if test="sal>0">
+	  		 ,sal=#{sal}
+	  		 </if>
+	  		  <if test="deptno>0">
+	  		 ,deptno=#{deptno}
+	  		 </if>
+	  		 <if test="empno > 0">
+	  		  where empno = #{empno}
+	  		 </if>
+	   </update>
+	   
+	   <delete id="empDelete" parameterType="list">
+	   	delete from emp
+	   	 where empno in
+	   	 <foreach item="item" index="index" collection="list"
+	   	          open="(" separator="," close=")">
+	   	          #{item}
+	   	 </foreach>   
+	   </delete>
+	   
 </mapper> 

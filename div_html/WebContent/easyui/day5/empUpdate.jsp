@@ -10,10 +10,10 @@
 	HashMapBilder hmb= new HashMapBilder();
 	Map<String,Object> rMap = hmb.hashMapBilder(pMap);
 	SqlMapEmpDao eDao = new SqlMapEmpDao();
-	int result = eDao.empINS(rMap);
+	int result = eDao.empUPD(rMap);
 	out.print(result);
-	if(result==1){
-	response.sendRedirect("EmpManager4Ver3.jsp?mode=insert"); //페이지 이동
+	if(result ==1){
+	response.sendRedirect("EmpManager4Ver3.jsp?mode=update"); //페이지 이동
 	}
 	else{
 		out.print(result);

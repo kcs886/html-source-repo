@@ -161,6 +161,15 @@
 </div>
 <!--====================== 검색 조건 추가하기    끝 ========================-->
  	<table id="dg_emp"></table>
+	<div class="easyui-pagination" style="border:1px solid #ccc;"
+        data-options="
+            total: 18,
+            pageSize: 5,
+            pageList:[2,3,5,10],
+            onSelectPage: function(pageNumber, pageSize){
+                $('#content').panel('refresh', 'show_content.php?page='+pageNumber);
+            }">
+	</div>
  	<script type="text/javascript">
  		$(document).ready(function(){
  			/* 동 입력 후 엔터 쳤을때 처리하기*/
@@ -223,11 +232,14 @@
  				closed:true
  			});
  			
- 			
+ 			$('#pp_emp').pagination({
+ 				pageList: [2,3,5,10]
+ 			   ,pageSize : 5
+ 			});
  			$('#dg_emp').datagrid({
  				toolbar: '#tbar_emp'
  				,title:'사원관리 - 자바스크립트 만으로 구성하기'
- 				,width:'1100px'
+ 				,width:'1100'
  				//,singleSelect:true
  			   //,url:'jsonEmpList.jsp',
  			    ,columns:[[

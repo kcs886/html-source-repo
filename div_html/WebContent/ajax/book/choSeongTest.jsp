@@ -23,13 +23,16 @@
       //alert(str.charCodeAt());
       var code;
       var result='';//ㅈㅂ을 반환하는 변수
-      for(i=0;i<str.length;i++){
+      for(i=0;i<str.length;i++) {
     	  code = str.charCodeAt(i)-44032;
-    	 // $("#d_msg").append(code+" ");
     	 if(code > -1 && code < 11172) result += cho[Math.floor(code/588)]; //11172 한글글자수(표현)가 11172자라서 범위를 말하는것임.
-      }
-      return result;
+   }   
    }
+      
+      return result;
+      
+   }
+ 
    var a = choSeongAccount("ㅍ");
 	alert("a:"+a);
    </script>

@@ -1,6 +1,8 @@
 package orm.dao;
 
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -52,8 +54,56 @@ public class SqlMapEmpDao {
 		}
 		return elist;
 		}
+	
+	public int empUPD(Map<String,Object> pMap){
+		int result=0;
+		logger.info("empList 호출 성공");
+		try {
+			Reader reader = Resources.getResourceAsReader(resource);
+			sqlMapper = new SqlSessionFactoryBuilder().build(reader);
+			//sql문을 요청하기 위한 SqlSession객체 생성하기
+			SqlSession sqlSec = sqlMapper.openSession(true);
+			result = sqlSec.update("empUPD",pMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	/**********************************************************************
+	 * 사원삭제 구현하기
+	 * sql문 DELETE FROM 테이블명 WHERE 컬럼명 IN (값)
+	 * @param empnos(사원번호)
+	 * @return int
+	 **********************************************************************/
+	public int empDEL(String[] empnos){
+		int result=0;
+		logger.info("empDEL 호출 성공");
+		try {
+			Reader reader = Resources.getResourceAsReader(resource);
+			sqlMapper = new SqlSessionFactoryBuilder().build(reader);
+			List<Integer> list = new ArrayList<>();
+			for(int i=0; i<empnos.length;i++) {
+				list.add(Integer.parseInt(empnos[i]));
+			}
+			SqlSession sqlSec = sqlMapper.openSession(true);
+			result = sqlSec.update("empDelete",list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	public static void main(String[] args) {
 		SqlMapEmpDao eDao = new SqlMapEmpDao();
-		List<Map<String,Object>> empList =eDao.empList(null);
+		Map<String,Object> rMap = new HashMap<>();
+		rMap.put("empno", 1212);
+		rMap.put("ename", "김충식");
+		rMap.put("job", "kim");
+		rMap.put("hiredate", "2020-01-01");
+		rMap.put("mgr", 3000);
+		rMap.put("sal", 3000);
+		rMap.put("comm", 100);
+		rMap.put("deptno", 20);
+		int result =eDao.empUPD(rMap);
 	}
 }

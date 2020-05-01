@@ -31,7 +31,7 @@
 	int result = eDao.empINS(pMap);
 	//response.sendRedirect("EmpManager4Ver2.jsp"); //페이지 이동
 	if(result==1){
-	   response.sendRedirect("EmpManager4Ver2.jsp");//페이지 열기전 db경유함.
+	   response.sendRedirect("EmpManager4Ver3.jsp?mode=insert");//페이지 열기전 db경유함.
 	}
 	//등록 실패 했을 때
 	else{ 
